@@ -58,7 +58,7 @@
 
   function reset() {
     Object.assign(player, {
-      x: 124, y: FLOOR, vx: 0, vy: 0, w: 16, h: 32, face: 1,
+      x: 124, y: FLOOR, vx: 0, vy: 0, w: 20, h: 32, face: 1,
       health: 100, maxHealth: 100, grounded: true, crouching: false,
       blocking: false, invulnerable: 0, attack: null, attackCooldown: 0,
       combo: 0, comboTimer: 0, hurtTimer: 0, jumpHeld: false,
@@ -503,111 +503,166 @@
   }
 
   function drawBackdrop() {
-    ctx.fillStyle = "#182033";
+    ctx.fillStyle = "#79c6cf";
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-    ctx.fillStyle = "#33314a";
-    ctx.fillRect(376, 24, 16, 8);
-    ctx.fillStyle = "#262a40";
-    ctx.fillRect(384, 24, 8, 8);
-    ctx.fillStyle = "#f2d89a";
-    ctx.fillRect(384, 26, 4, 4);
+    ctx.fillStyle = "#d9e99a";
+    ctx.fillRect(48, 28, 8, 8);
+    ctx.fillRect(56, 24, 8, 12);
+    ctx.fillRect(64, 28, 8, 8);
+    ctx.fillStyle = "#f8e9a2";
+    ctx.fillRect(56, 28, 4, 4);
 
-    drawCityLayer(.16, "#22283c", 160, 56, 80);
-    drawCityLayer(.3, "#292a42", 192, 72, 64);
-    drawSign(48, 96, "09", "#fa527f");
-    drawSign(376, 120, "FIGHT", "#54d9d0");
-    ctx.fillStyle = "#73445e";
-    ctx.fillRect(0, 208, WIDTH, 2);
-    drawRain();
+    drawForestLayer(.12, "#81bda0", 136, 56, 80);
+    drawForestLayer(.23, "#4e9877", 176, 72, 64);
+    drawForestCanopy();
+    drawForestMushrooms();
   }
 
-  function drawCityLayer(speed, color, base, minHeight, width) {
+  function drawForestLayer(speed, color, base, minHeight, width) {
     const scroll = Math.floor(gameTime * speed) % width;
     const start = -width - scroll;
     for (let x = start, index = 0; x < WIDTH + width; x += width, index++) {
-      const height = minHeight + (Math.abs(Math.sin((x + index * 41) * .071)) > .5 ? 24 : 0);
+      const height = minHeight + (Math.abs(Math.sin((x + index * 41) * .071)) > .5 ? 20 : 0);
       const top = base - height;
       ctx.fillStyle = color;
-      ctx.fillRect(x, top, width - TILE_WIDTH / 2, height);
-      ctx.fillStyle = "#37344e";
-      ctx.fillRect(x + 8, top - 8, 16, 8);
-      for (let y = top + 8; y < base - 8; y += TILE_HEIGHT * 2) {
-        for (let wx = x + 8; wx < x + width - 16; wx += 16) {
-          if ((wx + y + index * 7) % 3 !== 0) {
-            ctx.fillStyle = (wx + y) % 2 ? "#65516c" : "#4b4662";
-            ctx.fillRect(wx, y, 4, 4);
-          }
-        }
+      ctx.fillRect(x, top + 16, width - 8, height - 16);
+      ctx.fillStyle = "#376d61";
+      ctx.fillRect(x + 8, top + 8, 8, height - 8);
+      ctx.fillStyle = "#307c68";
+      ctx.fillRect(x + 16, top, 24, 16);
+      ctx.fillRect(x + 8, top + 8, 40, 8);
+      ctx.fillStyle = "#499b73";
+      ctx.fillRect(x + 16, top + 4, 16, 8);
+      ctx.fillRect(x + 24, top + 12, 16, 4);
+      ctx.fillStyle = "#a0c77b";
+      ctx.fillRect(x + 20, top + 4, 4, 4);
+      ctx.fillRect(x + 32, top + 12, 4, 4);
+      ctx.fillStyle = "#28564e";
+      ctx.fillRect(x + 4, base - 12, 4, 12);
+      ctx.fillRect(x + 28, base - 20, 4, 4);
+      if (index % 2 === 0) {
+        ctx.fillStyle = "#dfd17a";
+        ctx.fillRect(x + 52, top + 32, 4, 4);
+        ctx.fillStyle = "#548e70";
+        ctx.fillRect(x + 48, top + 36, 12, 4);
       }
     }
   }
 
-  function drawSign(x, y, text, color) {
-    const width = text.length * 8 + 16;
-    ctx.fillStyle = "#171b2c";
-    ctx.fillRect(x, y, width, 24);
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, width, 2);
-    ctx.fillRect(x, y + 22, width, 2);
-    ctx.fillRect(x, y, 2, 24);
-    ctx.fillRect(x + width - 2, y, 2, 24);
-    ctx.fillStyle = color;
-    ctx.font = "bold 8px monospace";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(text, x + width / 2, y + 12);
+  function drawForestCanopy() {
+    ctx.fillStyle = "#2d745c";
+    ctx.fillRect(0, 0, 24, 48);
+    ctx.fillRect(24, 0, 16, 24);
+    ctx.fillRect(88, 0, 16, 24);
+    ctx.fillRect(104, 0, 24, 40);
+    ctx.fillRect(168, 0, 20, 32);
+    ctx.fillRect(188, 0, 20, 48);
+    ctx.fillRect(272, 0, 24, 32);
+    ctx.fillRect(296, 0, 16, 48);
+    ctx.fillRect(376, 0, 24, 40);
+    ctx.fillRect(400, 0, 16, 24);
+    ctx.fillRect(456, 0, 24, 48);
+    ctx.fillStyle = "#43885d";
+    ctx.fillRect(4, 8, 16, 8);
+    ctx.fillRect(108, 8, 16, 8);
+    ctx.fillRect(192, 8, 12, 8);
+    ctx.fillRect(300, 8, 8, 8);
+    ctx.fillRect(460, 8, 16, 8);
+    ctx.fillStyle = "#a5c96f";
+    ctx.fillRect(12, 16, 4, 4);
+    ctx.fillRect(116, 20, 4, 4);
+    ctx.fillRect(196, 16, 4, 4);
+    ctx.fillRect(304, 24, 4, 4);
+    ctx.fillRect(468, 16, 4, 4);
+    ctx.fillStyle = "#e7f2ae";
+    const fireflies = [[92, 82], [354, 72], [432, 112], [24, 148], [298, 96]];
+    for (let i = 0; i < fireflies.length; i++) {
+      const [x, y] = fireflies[i];
+      if (Math.sin(gameTime * 2 + i * 1.7) > -.2) ctx.fillRect(x, y, 2, 2);
+    }
+  }
+
+  function drawForestMushrooms() {
+    const mushrooms = [[32, 194], [185, 196], [308, 186], [446, 198]];
+    for (const [x, y] of mushrooms) {
+      ctx.fillStyle = "#f2dba1";
+      ctx.fillRect(x + 2, y + 4, 4, 6);
+      ctx.fillStyle = "#cc5360";
+      ctx.fillRect(x, y + 2, 8, 4);
+      ctx.fillStyle = "#f6e5ad";
+      ctx.fillRect(x + 2, y + 2, 2, 2);
+    }
+  }
+
+  function drawLeafParticles() {
+    const colors = ["#d9d77c", "#e7a761", "#93bf69"];
+    for (let i = 0; i < 10; i++) {
+      const drift = Math.floor(gameTime * (8 + i % 3 * 3));
+      const x = (i * 61 + drift) % WIDTH;
+      const y = 44 + (i * 43 + Math.floor(gameTime * 8)) % 136;
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.fillRect(x, y + (i % 2), 3, 2);
+      ctx.fillRect(x + 2, y - 1 + (i % 2), 2, 2);
+    }
   }
 
   function drawRain() {
-    ctx.fillStyle = "#42445c";
-    for (let i = 0; i < 24; i++) {
-      const x = (i * 79 + Math.floor(gameTime * 44)) % WIDTH;
-      const y = (i * 37 + Math.floor(gameTime * 66)) % FLOOR;
-      ctx.fillRect(x, y, 2, 6);
-    }
+    drawLeafParticles();
   }
 
   function drawPlatforms() {
     for (const platform of platforms) {
-      ctx.fillStyle = "#29263b";
+      ctx.fillStyle = "#79513b";
       ctx.fillRect(platform.x, platform.y, platform.w, platform.h);
-      ctx.fillStyle = "#f24b79";
+      ctx.fillStyle = "#76b852";
       ctx.fillRect(platform.x, platform.y, platform.w, 2);
-      ctx.fillStyle = "#81506b";
-      ctx.fillRect(platform.x, platform.y + 2, platform.w, 2);
+      ctx.fillStyle = "#b0d46c";
+      ctx.fillRect(platform.x + 2, platform.y, platform.w - 4, 2);
+      ctx.fillStyle = "#a06c45";
+      ctx.fillRect(platform.x, platform.y + 3, platform.w, platform.h - 3);
       for (let x = platform.x; x < platform.x + platform.w; x += TILE_WIDTH) {
-        ctx.fillStyle = "#51405b";
-        ctx.fillRect(x + 4, platform.y + 4, 8, 2);
+        ctx.fillStyle = "#6d4938";
+        ctx.fillRect(x + 3, platform.y + 4, 2, 2);
+        ctx.fillStyle = "#c18a55";
+        ctx.fillRect(x + 10, platform.y + 4, 3, 2);
       }
     }
   }
 
   function drawGround() {
-    ctx.fillStyle = "#272738";
+    ctx.fillStyle = "#684a36";
     ctx.fillRect(0, FLOOR, WIDTH, HEIGHT - FLOOR);
-    ctx.fillStyle = "#f24b79";
+    ctx.fillStyle = "#69a948";
     ctx.fillRect(0, FLOOR, WIDTH, 3);
+    ctx.fillStyle = "#afd56f";
+    ctx.fillRect(0, FLOOR, WIDTH, 1);
     for (let x = 0; x < WIDTH; x += TILE_WIDTH) {
-      ctx.fillStyle = "#383348";
+      ctx.fillStyle = "#806043";
       ctx.fillRect(x, FLOOR + 4, TILE_WIDTH - 1, TILE_HEIGHT);
-      ctx.fillStyle = "#252638";
+      ctx.fillStyle = "#72533c";
       ctx.fillRect(x + TILE_WIDTH / 2, FLOOR + 12, TILE_WIDTH / 2 - 1, TILE_HEIGHT);
-      ctx.fillStyle = "#4a4052";
+      ctx.fillStyle = "#a4774d";
       ctx.fillRect(x + 4, FLOOR + 6, 6, 2);
+      ctx.fillStyle = "#4b7142";
       ctx.fillRect(x + 2, FLOOR + 18, 8, 2);
+      if (x % 32 === 0) {
+        ctx.fillStyle = "#b1d06c";
+        ctx.fillRect(x + 12, FLOOR - 2, 2, 3);
+        ctx.fillRect(x + 14, FLOOR - 1, 2, 2);
+      }
     }
   }
 
   function drawFighter(fighter, isPlayer) {
     const crouching = isPlayer && fighter.crouching;
     const rows = fighterSprite(fighter, isPlayer, crouching);
+    const spriteCenter = Math.floor(Math.max(...rows.map((row) => row.length)) / 2);
     const height = rows.length * PIXEL;
     const top = fighter.y - height + Math.round(isPlayer ? breathingOffset(fighter) : 0);
-    const left = Math.round(fighter.x - 8);
     const palette = isPlayer
-      ? { K: "#151725", H: "#f0bc91", R: "#241a28", P: "#22b6ae", W: "#e5d8ba", Q: "#34435c", G: "#ed6e59", L: "#a6fff1" }
-      : { K: "#171725", H: "#dba281", R: "#281c2b", P: fighter.hue, W: "#bfa9a0", Q: "#343047", G: "#ef6074", L: "#ffd48b" };
+      ? { K: "#222337", H: "#e9ab78", R: "#382238", P: "#2b73a0", W: "#e7d6a0", Q: "#394765", G: "#e56e4d", L: "#c5e28b", B: "#dc4f4e", D: "#783b3e", A: "#f2c285", C: "#f5d894", T: "#dc4f4e" }
+      : { K: "#171725", H: "#dba281", R: "#281c2b", P: fighter.hue, W: "#bfa9a0", Q: "#343047", G: "#ef6074", L: "#ffd48b", B: "#a44d55", D: "#68424c", A: "#e7b68a", C: "#f2ce9b", T: "#a44d55" };
     if (fighter.hitFlash > 0 || fighter.hurtTimer > 0) palette.P = "#f3d9db";
 
     ctx.save();
@@ -626,7 +681,7 @@
         const color = palette[rows[row][column]];
         if (!color) continue;
         ctx.fillStyle = color;
-        ctx.fillRect((column - 4) * PIXEL, row * PIXEL + spriteOffset, PIXEL, PIXEL);
+        ctx.fillRect((column - spriteCenter) * PIXEL, row * PIXEL + spriteOffset, PIXEL, PIXEL);
       }
     }
 
@@ -679,24 +734,67 @@
   }
 
   function fighterSprite(fighter, isPlayer, crouching) {
+    if (!isPlayer) {
+      return [
+        ".....RRRRRR.",
+        "....RRRRRRR.",
+        "...KKHHHHK..",
+        "..KHHHHHHH..",
+        "..KHHHHHHHK.",
+        "..KHHHHHHHK.",
+        "...KKKAAKK..",
+        "..KKKAAKKK..",
+        ".KKPPPPPPK..",
+        ".KPPWPPWPPK.",
+        ".KPPPPPPPPK.",
+        "..KPPPPPPK..",
+        "..KWWWWWWK..",
+        "..KKQQQKK...",
+        ".KKKQQQKKK..",
+        ".KKK...KKK..",
+      ];
+    }
     const idle = [
-      "....RRRR", "...RRRRR", "...HHHHK", "..KHHHHK",
-      "..KHHHHK", "...KKKK.", "..KPPPK.", ".KPPPPPP",
-      ".KPPPPPK", ".KWWWBK.", "..KPPPK.", "..KQQK..",
-      "..KQQK..", ".KK.PKK.", ".KK.PKK.", "KK...KK.",
+      ".....RRRRRR.",
+      "....RRRRRRR.",
+      "...KKHHHHK..",
+      "..KHHBHHHK.T",
+      "..KHHBBBBHHH.",
+      "..KHHHHHHH.T",
+      "...KKKAKK...",
+      "..KKKAAKKK..",
+      ".KKPPPPPPK..",
+      ".KPPWPPWPPK.",
+      ".KPPPPPPPPK.",
+      "..KPPPPPPK..",
+      "..KWWWWWWK..",
+      "..KKQQQKK...",
+      ".KKKQQQKKK..",
+      ".KKK...KKK..",
     ];
     const walkA = idle.slice();
-    walkA[13] = "..KK.PK.";
-    walkA[14] = ".KK..PK.";
-    walkA[15] = "KK...KK.";
+    walkA[14] = ".KK..QQKK...";
+    walkA[15] = "KKK...KKK....";
     const walkB = idle.slice();
-    walkB[13] = ".KP..KK.";
-    walkB[14] = ".K.P.KK.";
-    walkB[15] = ".KK..KK.";
+    walkB[14] = "..KKQQ..KK...";
+    walkB[15] = ".KKK....KKK..";
     const crouch = [
-      "........", "........", "....RRRR", "...HHHHK",
-      "..KHHHHK", "..KHHHHK", "...KKKK.", "..KPPPK.",
-      ".KPPPPPP", ".KPPPPPK", ".KWWWBK..", "..KPPPK.",
+      "............",
+      "............",
+      ".....RRRRRR.",
+      "....KKHHHHK..",
+      "...KHHBHHK.T.",
+      "...KHHBBBBHHH.",
+      "...KHHHHHHHH.T",
+      "....KKKAAKK..",
+      "...KKPPPPPK..",
+      "..KPPWPPWPPK.",
+      "..KPPPPPPPPK.",
+      "...KWWWWWWK..",
+      "..KKQQQQQKK..",
+      ".KKKK...KKKK.",
+      ".KKK.....KKK.",
+      "KKK........KK",
     ];
     if (crouching) return crouch;
     if (isPlayer && fighter.attack?.type === "spinKick") return idle;
