@@ -18,8 +18,8 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(ellipse at 50% -25%, rgba(86, 62, 120, .25), transparent 55%),
-    #10121a;
+    radial-gradient(ellipse at 50% -25%, rgba(106, 151, 92, .23), transparent 55%),
+    #111a1a;
   color: var(--ink);
   font-family: Inter, Arial, sans-serif;
 }
@@ -96,7 +96,7 @@ button { font: inherit; }
   overflow: hidden;
   border: 1px solid rgba(221, 223, 255, .12);
   border-radius: 7px;
-  background: #171a26;
+  background: #1b2b2c;
   box-shadow: 0 22px 80px rgba(0,0,0,.26);
 }
 
