@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10131d">
+    <title>Neon Brawl — Platform Fighter</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Neon Brawl home">
+          <span class="brand-mark">N</span>
+          <span>NEON <b>BRAWL</b></span>
+        </a>
+        <div class="status-chip"><span class="live-dot"></span> ARCADE MODE</div>
+        <button class="sound-button" id="sound-toggle" type="button" aria-pressed="false">
+          <span aria-hidden="true">♫</span> <span id="sound-label">SOUND ON</span>
+        </button>
+      </header>
+
+      <section class="arena" aria-label="Game arena">
+        <div class="game-hud">
+          <div class="fighter-card">
+            <div class="fighter-icon">V</div>
+            <div class="fighter-info">
+              <div class="fighter-name">VANTA <span>LV. 01</span></div>
+              <div class="health-track"><div class="health-fill" id="player-health"></div></div>
+            </div>
+            <div class="health-value" id="player-health-text">100</div>
+          </div>
+          <div class="round-info">
+            <div class="round-label">WAVE</div>
+            <div class="round-number" id="wave-label">01</div>
+          </div>
+          <div class="score-card">
+            <div class="score-label">SCORE</div>
+            <div class="score-number" id="score-label">000000</div>
+            <div class="combo-label" id="combo-label">READY TO FIGHT</div>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="game" width="960" height="540" aria-label="Neon Brawl game canvas"></canvas>
+          <div class="start-screen" id="start-screen">
+            <div class="start-kicker">THE CITY IS YOURS TO TAKE BACK</div>
+            <h1>FIGHT<br><span>YOUR WAY</span></h1>
+            <p>Move, jump, and chain your attacks. They won't wait for you.</p>
+            <button class="primary-button" id="start-button" type="button">START THE FIGHT <span>→</span></button>
+            <div class="start-controls">A / D TO MOVE <i>·</i> SPACE TO JUMP <i>·</i> J / K TO STRIKE</div>
+          </div>
+          <div class="ko-screen hidden" id="ko-screen">
+            <div class="ko-kicker">THE STREETS GO QUIET</div>
+            <h2>FIGHT<br><span>OVER</span></h2>
+            <p>Final score <strong id="final-score">000000</strong></p>
+            <button class="primary-button" id="restart-button" type="button">RUN IT BACK <span>↻</span></button>
+          </div>
+          <div class="toast" id="toast" aria-live="polite"></div>
+          <div class="corner-label">DISTRICT 09 <span>•</span> NIGHT SHIFT</div>
+        </div>
+      </section>
+
+      <section class="controls-panel" aria-label="Controls">
+        <div class="controls-heading">
+          <span class="eyebrow">YOUR MOVE</span>
+          <span class="controls-hint">COMBINE MOVEMENT + ATTACKS</span>
+        </div>
+        <div class="control-list">
+          <div class="control-item">
+            <div class="key-group"><kbd>A</kbd><kbd>D</kbd></div>
+            <div><strong>MOVE</strong><small>Left / right</small></div>
+          </div>
+          <div class="control-item">
+            <div class="key-group"><kbd>W</kbd><span class="or">OR</span><kbd>SPACE</kbd></div>
+            <div><strong>JUMP</strong><small>Evade &amp; strike</small></div>
+          </div>
+          <div class="control-item">
+            <div class="key-group"><kbd>S</kbd></div>
+            <div><strong>DUCK</strong><small>Low profile</small></div>
+          </div>
+          <div class="control-item">
+            <div class="key-group"><kbd>J</kbd><kbd>K</kbd></div>
+            <div><strong>PUNCH / KICK</strong><small>Build a combo</small></div>
+          </div>
+          <div class="control-item">
+            <div class="key-group"><kbd>L</kbd><kbd>I</kbd></div>
+            <div><strong>GRAPPLE / BLOCK</strong><small>Throw / defend</small></div>
+          </div>
+        </div>
+      </section>
+      <footer class="footer"><span>NEON BRAWL</span><span>BUILT FOR THE STREETS, NOT THE RULES.</span><span>VER. 0.1.0</span></footer>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>
