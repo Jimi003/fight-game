@@ -42,13 +42,13 @@
         </div>
 
         <div class="canvas-wrap">
-          <canvas id="game" width="960" height="540" aria-label="Neon Brawl game canvas"></canvas>
+          <canvas id="game" width="960" height="540" aria-label="Neon Brawl pixel-art fighting game"></canvas>
           <div class="start-screen" id="start-screen">
             <div class="start-kicker">THE CITY IS YOURS TO TAKE BACK</div>
             <h1>FIGHT<br><span>YOUR WAY</span></h1>
             <p>Move, jump, and chain your attacks. They won't wait for you.</p>
             <button class="primary-button" id="start-button" type="button">START THE FIGHT <span>→</span></button>
-            <div class="start-controls">A / D TO MOVE <i>·</i> SPACE TO JUMP <i>·</i> J / K TO STRIKE</div>
+            <div class="start-controls">A / D MOVE <i>·</i> SPACE JUMP <i>·</i> J / K ATTACK</div>
           </div>
           <div class="ko-screen hidden" id="ko-screen">
             <div class="ko-kicker">THE STREETS GO QUIET</div>
@@ -87,9 +87,17 @@
             <div class="key-group"><kbd>L</kbd><kbd>I</kbd></div>
             <div><strong>GRAPPLE / BLOCK</strong><small>Throw / defend</small></div>
           </div>
+          <div class="control-item">
+            <div class="key-group combo-keys"><kbd>S</kbd><span class="or">+</span><kbd>A/D</kbd><span class="or">+</span><kbd>J</kbd></div>
+            <div><strong>ENERGY BOMB</strong><small>Down + direction + punch</small></div>
+          </div>
+          <div class="control-item">
+            <div class="key-group combo-keys"><kbd>W</kbd><span class="or">+</span><kbd>A/D</kbd><span class="or">+</span><kbd>K</kbd></div>
+            <div><strong>SPIRAL KICK</strong><small>Up + direction + kick</small></div>
+          </div>
         </div>
       </section>
-      <footer class="footer"><span>NEON BRAWL</span><span>BUILT FOR THE STREETS, NOT THE RULES.</span><span>VER. 0.1.0</span></footer>
+      <footer class="footer"><span>NEON BRAWL</span><span>16 × 8 PIXEL TILES · FOUR-TILE FIGHTER</span><span>VER. 0.2.0</span></footer>
     </main>
     <script src="game.js"></script>
   </body>
